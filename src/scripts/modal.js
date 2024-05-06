@@ -5,18 +5,7 @@ function showPopup(popup) {
   document.addEventListener("keydown", quitOnEsc);
   popup.addEventListener("click", quitOnOverlayClick);
 }
-
-// Показать попап с картинкой
-
-function showPopupImage(img, title, imgPopup) {
-  return () => {
-    showPopup(imgPopup);
-    imgPopup.querySelector(".popup__image").src = img;
-    imgPopup.querySelector(".popup__caption").textContent = title;
-  };
-}
-
-// скрыть попап по нажатию на кнопку
+// скрыть попап
 
 function closePopup() {
   document
@@ -30,7 +19,6 @@ function closePopup() {
 function quitOnEsc(e) {
   if (e.key == "Escape") {
     closePopup();
-    document.removeEventListener("keydown", quitOnEsc);
   }
 }
 
@@ -42,4 +30,4 @@ function quitOnOverlayClick(e) {
   }
 }
 
-export { showPopup, closePopup, showPopupImage };
+export { showPopup, closePopup };
