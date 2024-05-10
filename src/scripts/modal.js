@@ -5,6 +5,7 @@ function showPopup(popup) {
   document.addEventListener("keydown", quitOnEsc);
   popup.addEventListener("click", quitOnOverlayClick);
 }
+
 // скрыть попап
 
 function closePopup() {

@@ -25,17 +25,6 @@ const editProfilePopup = document.querySelector(".popup_type_edit");
 const addCardPopup = document.querySelector(".popup_type_new-card");
 const imgPopup = document.querySelector(".popup_type_image");
 
-// Показать попап с картинкой
-
-function showPopupImage(img, title, popup) {
-  return () => {
-    showPopup(popup);
-    popup.querySelector(".popup__image").src = img;
-    popup.querySelector(".popup__image").alt = `${title} на фотографии`;
-    popup.querySelector(".popup__caption").textContent = title;
-  };
-}
-
 // Узлы профиля пользователя
 
 const profileName = document.querySelector(".profile__title");
@@ -48,6 +37,17 @@ const nameInput = editProfileForm.querySelector(".popup__input_type_name");
 const jobInput = editProfileForm.querySelector(
   ".popup__input_type_description"
 );
+
+// Показать попап с картинкой
+
+function showPopupImage(img, title, popup) {
+  return () => {
+    popup.querySelector(".popup__image").src = img;
+    popup.querySelector(".popup__image").alt = `${title} на фотографии`;
+    popup.querySelector(".popup__caption").textContent = title;
+    showPopup(popup);
+  };
+}
 
 // Обработчик формы редактирования профиля
 
@@ -84,7 +84,6 @@ function handleAddCardSubmit(e) {
   );
 
   e.target.reset();
-  e.target.reset();
 
   closePopup();
 }
@@ -92,7 +91,7 @@ function handleAddCardSubmit(e) {
 // Слушатели событий
 
 closeBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", () => {
     closePopup();
   });
 });
