@@ -57,6 +57,8 @@ const avatarInput = editProfileImgPopup.querySelector(
 );
 
 profileImg.addEventListener("click", () => {
+  clearValidation(editProfileImgPopup, validationConfig);
+  avatarInput.value = "";
   showPopup(editProfileImgPopup);
 });
 
@@ -82,8 +84,7 @@ function handleAvatarSubmit(e) {
 }
 
 avatarForm.addEventListener("submit", (e) => {
-  e.preventDefault()
-  handleAvatarSubmit();
+  handleAvatarSubmit(e);
 });
 
 // Слушатели событий на кнопки
