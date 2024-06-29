@@ -46,7 +46,7 @@ function enableValidation({
         const errorElement = formElement.querySelector(
           `.${inputElement.id}-error`
         );
-        inputElement.classList.remove("popup__input_type_error");
+        inputElement.classList.remove(inputErrorClass);
         errorElement.textContent = "";
       }
     }
@@ -56,7 +56,11 @@ function enableValidation({
 function setButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
-  } else buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.disabled = true;
+  } else {
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.disabled = false;
+  }
 
   function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {

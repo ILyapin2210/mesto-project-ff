@@ -9,9 +9,9 @@ function showPopup(popup) {
 // скрыть попап
 
 function closePopup() {
-  document
-    .querySelector(".popup_is-opened")
-    .classList.remove("popup_is-opened");
+  const popup = document.querySelector(".popup_is-opened");
+  popup.classList.remove("popup_is-opened");
+  popup.removeEventListener("click", quitOnOverlayClick);
   document.removeEventListener("keydown", quitOnEsc);
 }
 

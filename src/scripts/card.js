@@ -1,4 +1,4 @@
-import { deleteCard, addLike, removeLike} from "./api.js";
+import { deleteCard, addLike, removeLike } from "./api.js";
 
 // Функция создания карточки
 
@@ -19,7 +19,7 @@ function createCard(
   const cardImage = card.querySelector(".card__image");
   cardImage.src = cardData.link;
   cardImage.alt = `${cardData.name} на фотографии`;
-  
+
   cardImage.addEventListener(
     "click",
     showPopupImage(cardData.link, cardData.name, imgPopup)
@@ -41,8 +41,8 @@ function createCard(
   }
 
   const likeBtn = card.querySelector(".card__like-button");
-  
-// Обновим счётчик лайков и изменим состояние
+
+  // Обновим счётчик лайков и изменим состояние
 
   likeBtn.addEventListener("click", () => {
     handleLike(likeBtn, isLiked, cardData._id, cardLikesCounter);
@@ -68,26 +68,36 @@ function createCard(
 
 function handleLike(likeBtn, isLiked, cardId, cardLikesCounter) {
   if (!isLiked) {
-    addLike(cardId).then(() => {
-      likeBtn.classList.add("card__like-button_is-active");
-      cardLikesCounter.textContent = +cardLikesCounter.textContent + 1;
-    });
-  }
-  else {
-    removeLike(cardId).then(() => {
-      likeBtn.classList.remove("card__like-button_is-active");
-      cardLikesCounter.textContent = +cardLikesCounter.textContent - 1;
-    })
-
+    addLike(cardId)
+      .then((res) => {
+        likeBtn.classList.add("card__like-button_is-active");
+        cardLikesCounter.textContent = res.likes.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    removeLike(cardId)
+      .then((res) => {
+        likeBtn.classList.remove("card__like-button_is-active");
+        cardLikesCounter.textContent = res.likes.length;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
 // Функция удаления карточки
 
 function removeCard(deleteBtn, cardId) {
-  deleteCard(cardId).then(() => {
-    deleteBtn.closest(".card").remove();
-  });
+  deleteCard(cardId)
+    .then(() => {
+      deleteBtn.closest(".card").remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 export { createCard, handleLike, removeCard };
