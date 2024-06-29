@@ -10,6 +10,19 @@
   margin-bottom: 10px;
 }
 
+.popup__input_type_error {
+  border-block-end: 1px solid #FF0000;
+}
+
+.popup__input-error {
+  display: block;
+  height: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 14.52px;
+  color:  #FF0000;
+}
+
 .popup__input:last-of-type {
   margin-bottom: 0;
 }
